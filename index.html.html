@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>QA Challenge — Найди ошибку</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f1f3fa;
+            color: #252944;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 25px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 25px #20243a12;
+        }
+
+        h1 {
+            color: #3949ab;
+        }
+
+        .instruction {
+            line-height: 1.6;
+            color: #60657a;
+        }
+
+        #picture {
+            display: block;
+            width: 80%;
+            max-height: 400px;
+            height: auto;
+            object-fit: contain;
+            margin: 0%;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        #picture:hover {
+            transform: scale(1.01);
+        }
+
+        #picture:active {
+            transform: scale(0.98);
+        }
+
+        .counter {
+            margin: 18px 0;
+            color: #60657a;
+        }
+
+        #error {
+            display: none;
+            padding: 18px;
+            margin-top: 20px;
+            border: 2px solid #e35c65;
+            border-radius: 12px;
+            background: #fff0f1;
+            color: #a51f2b;
+            text-align: left;
+        }
+
+        #error h2 {
+            margin-top: 0;
+        }
+
+        button {
+            margin-top: 18px;
+            padding: 13px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #3949ab;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #283593;
+        }
+
+        footer {
+            margin-top: 22px;
+            color: #858ba0;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>🔎 Найди ошибку!</h1>
+
+        <p class="instruction">
+            Ты — тестировщик программного обеспечения.
+            Нажми на картинку несколько раз и проверь,
+            правильно ли работает сайт.
+        </p>
+
+        <!-- Картинка для тестирования -->
+        <img
+            id="picture"
+            src="https://psv4.vkuserphoto.ru/s/v1/d2/TP4GitVSMfomFONndSqpQPEDH6z4dn0qWL3-V6Kctx1Rxbuh3tEJLJTpFSCn9q27Z6I2s_Q3-KnpK5EqlN8DqA8iD5RwsvQyqywCQA1CVkjo9fY6MJGZmtVloqlzvsVp0Wzs6NVguwxj/kharita_aa.png"
+            alt="Харита"
+        >
+
+        <p class="counter">
+            Количество нажатий:
+            <strong id="count">0</strong>
+        </p>
+
+        <!-- Специально созданная ошибка -->
+        <div id="error" role="alert">
+            <h2>⚠️ Ошибка!</h2>
+
+            <p><strong>Код ошибки:</strong> IMG-500</p>
+
+            <p>
+                После нескольких нажатий сайт перестал
+                работать правильно.
+            </p>
+
+            <p>
+                <strong>Задание:</strong>
+                запомни, что ты делал перед появлением ошибки,
+                и объясни, как её повторить.
+            </p>
+        </div>
+
+        <button id="reset">Попробовать снова</button>
+
+        <footer>
+            Учебный проект по тестированию ПО
+        </footer>
+
+    </div>
+
+    <script>
+        let clicks = 0;
+
+        const picture = document.getElementById("picture");
+        const counter = document.getElementById("count");
+        const error = document.getElementById("error");
+        const reset = document.getElementById("reset");
+
+        // БАГ: ошибка появляется после третьего нажатия
+        picture.addEventListener("click", function () {
+            clicks++;
+
+            counter.textContent = clicks;
+
+            if (clicks >= 3) {
+                error.style.display = "block";
+            }
+        });
+
+        // Сброс задания
+        reset.addEventListener("click", funct
+
+
+ion () {
+            clicks = 0;
+            counter.textContent = 0;
+            error.style.display = "none";
+        });
+    </script>
+</body>
+</html>
+
+
+
